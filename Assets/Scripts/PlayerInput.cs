@@ -7,6 +7,8 @@ namespace LD32
     {
 
         Vector2 currentMove;
+        bool _fire;
+        Vector2 _lookAt;
 
         // Update is called once per frame
         void Update()
@@ -15,12 +17,35 @@ namespace LD32
 
             currentMove.x = Input.GetAxis("Horizontal");
             currentMove.y = Input.GetAxis("Vertical");
+
+            _fire = Input.GetButtonDown("Fire");
+
+            var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0;
+
+            _lookAt = mousePosition;
         }
 
         public Vector2 GetMoveVector()
         {
             return currentMove;
         }
+
+        public bool fire
+        {
+            get
+            {
+                return _fire;
+            }
+        }
+
+        public Vector2 lookAt
+        {
+            get
+            {
+                return _lookAt;
+            }
+        }
     }
-    
+
 }

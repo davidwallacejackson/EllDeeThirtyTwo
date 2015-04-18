@@ -29,6 +29,11 @@ namespace LD32
                 impulse = impulse.normalized * acceleration * Time.deltaTime;
                 body.AddForce(impulse);
             }
+
+            var lookDirection = (Vector2)transform.position - input.lookAt;
+
+            float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
 
