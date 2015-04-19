@@ -85,10 +85,23 @@ namespace LD32
             {
                 return FindObjectOfType<PlayerController>();
             }
-            else
+
+            //we're on Team GOOD, so we need to find another
+            //enemy to shoot:
+
+            //TODO: smarter and more efficient target selection
+            var enemies = FindObjectsOfType<EnemyController>();
+
+            foreach (var enemy in enemies)
             {
-                return FindObjectOfType<EnemyController>();
+                if (enemy.gameObject != this.gameObject)
+                {
+                    return enemy;
+                }
             }
+
+            //we couldn't find a valid target
+            return null;
         }
         #endregion
 

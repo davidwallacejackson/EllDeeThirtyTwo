@@ -29,6 +29,8 @@ GameObject:
   - 50: {fileID: 5071760}
   - 114: {fileID: 11484998}
   - 114: {fileID: 11422674}
+  - 60: {fileID: 6089946}
+  - 114: {fileID: 11492914}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -43,7 +45,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154740}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.21000004, y: 2.29999995, z: 0}
+  m_LocalPosition: {x: -1.98000002, y: -2.05999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 450508}
@@ -55,7 +57,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107892}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -.707106829, w: .707106709}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
@@ -68,16 +70,16 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154740}
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 4
   m_AngularDrag: 0
   m_GravityScale: 0
   m_FixedAngle: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
---- !u!61 &6115234
-BoxCollider2D:
+--- !u!60 &6089946
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -87,8 +89,27 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: -.489903927, y: .494538665}
+      - {x: -.398661852, y: .503650427}
+      - {x: .503066897, y: .0487098694}
+      - {x: .504019737, y: -.0422263145}
+      - {x: -.415928125, y: -.506966352}
+      - {x: -.489183426, y: -.475662947}
+--- !u!61 &6115234
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154740}
+  m_Enabled: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: .0250606537}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.05012131}
 --- !u!114 &11422674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,6 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToSpawnBullet: 1.5
+  bulletForce: 75
+  mode: 0
+  bulletDamage: 20
 --- !u!114 &11471226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,8 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca6f985145e5714b80b0d8f6a9f8d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 0
-  maxSpeed: 0
+  acceleration: 3000
+  maxSpeed: 10
 --- !u!114 &11484998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,6 +149,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c53c2fbb829c914780a2a1bd38eb635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11492914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb7a3f3c3a53394da4fbef3d0a4579c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
 --- !u!212 &21294332
 SpriteRenderer:
   m_ObjectHideFlags: 1

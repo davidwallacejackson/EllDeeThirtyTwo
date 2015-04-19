@@ -6,6 +6,7 @@ namespace LD32
     {
         public float distanceToSpawnBullet;
         public float bulletForce;
+        public BulletMode mode = BulletMode.Damage;
         public int bulletDamage;
 
         public void FireBullet()
@@ -14,7 +15,7 @@ namespace LD32
                 transform.TransformPoint(new Vector2(1, 0)),
                 transform.rotation,
                 bulletForce,
-                BulletMode.Damage,
+                mode,
                 bulletDamage);
             
         }
