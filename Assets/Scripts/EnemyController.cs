@@ -9,11 +9,26 @@ namespace LD32
         Rigidbody2D body;
         IInput input;
         ICannon cannon;
+        Team _team = Team.EVIL;
 
         IEnumerator firePeriodically;
 
         public float maxTurnSpeed;
         public float fireDelay;
+
+        public Team team
+        {
+            get
+            {
+                return _team;
+            }
+            set
+            {
+                _team = value;
+                teamChanged.Invoke(_team);
+            }
+        }
+        public TeamEvent teamChanged = new TeamEvent();
 
         // Use this for initialization
         void Start()
