@@ -5,13 +5,11 @@ namespace LD32
 {
     public class CamerController : BaseBehaviour
     {
-        Camera camera;
         PlayerController player;
         #region Unity Hooks
         public override void Awake()
         {
             base.Awake();
-            camera = GetComponent<Camera>();
         }
 
         public override void Start()

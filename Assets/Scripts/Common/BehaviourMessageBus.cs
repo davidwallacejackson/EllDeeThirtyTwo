@@ -13,12 +13,19 @@ namespace LD32
     {
         public GlobalMessageBus global = GlobalMessageBus.Instance;
 
-        /// <summary>
-        /// Trigger or respond to damage;
-        /// </summary>
-        public IntEvent damage = new IntEvent();
-        public BehaviourEvent destroyed = new BehaviourEvent();
-        public TeamEvent teamChanged = new TeamEvent();
+
+        IntEvent _damage = new IntEvent();
+        public IntEvent damage { get { return _damage; } }
+
+        BehaviourEvent _destroyed = new BehaviourEvent();
+        public BehaviourEvent destroyed { get { return _destroyed; } }
+
+        NoArgEvent _fireBullet = new NoArgEvent();
+        public NoArgEvent fireBullet { get { return _fireBullet; } }
+
+        TeamEvent _teamChanged = new TeamEvent();
+        public TeamEvent teamChanged { get { return _teamChanged; } }
+
     }
 
 }

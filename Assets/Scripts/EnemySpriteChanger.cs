@@ -9,7 +9,6 @@ namespace LD32
 
         Dictionary<Team, Sprite> teamSprites;
 
-        EnemyController controller;
         SpriteRenderer spriteRenderer;
 
         // Use this for initialization
@@ -22,7 +21,6 @@ namespace LD32
         public override void Start()
         {
             spriteRenderer = transform.FindChild("Sprite").GetComponent<SpriteRenderer>();
-            controller = GetComponent<EnemyController>();
 
             teamSprites = new Dictionary<Team, Sprite>()
             {

@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace LD32
 {
+    //can fire Cannon by raising fireEvent
     public interface IInput
     {
         Vector2 GetMoveVector();
@@ -12,9 +13,5 @@ namespace LD32
             get;
         }
 
-        bool fire
-        {
-            get;
-        }
     }
 }

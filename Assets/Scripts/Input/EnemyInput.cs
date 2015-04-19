@@ -33,8 +33,10 @@ namespace LD32
         }
         Vector2 lastTargetPosition;
         Team team = Team.EVIL;
-
+        IEnumerator firePeriodically;
         bool targetIsAlive = false;
+
+        public float fireDelay;
 
         #region Unity Hooks
         public override void Awake()
@@ -47,6 +49,14 @@ namespace LD32
         public override void Start()
         {
             target = GetTarget();
+
+            firePeriodically = FirePeriodically();
+            StartCoroutine(firePeriodically);
+        }
+
+        void OnDestroy()
+        {
+            StopCoroutine(firePeriodically);
         }
         #endregion
 
@@ -102,6 +112,15 @@ namespace LD32
 
             //we couldn't find a valid target
             return null;
+        }
+
+        IEnumerator FirePeriodically()
+        {
+            while (true)
+            {
+                messageBus.fireBullet.Invoke();
+                yield return new WaitForSeconds(fireDelay);
+            }
         }
         #endregion
 

@@ -4,8 +4,9 @@ using System.Collections;
 
 namespace LD32
 {
-    public class IntEvent : UnityEvent<int> { }
     public class BehaviourEvent : UnityEvent<BaseBehaviour> { }
-    public class TeamEvent : UnityEvent<Team> { }
+    public class IntEvent : UnityEvent<int> { }
     public class GameObjectEvent : UnityEvent<GameObject> { }
+    public class NoArgEvent : UnityEvent { }
+    public class TeamEvent : UnityEvent<Team> { }
 }

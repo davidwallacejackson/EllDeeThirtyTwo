@@ -6,15 +6,8 @@ namespace LD32
 
     public class EnemyController : BaseBehaviour
     {
-        Rigidbody2D body;
         IInput input;
-        ICannon cannon;
         Team _team = Team.EVIL;
-
-        IEnumerator firePeriodically;
-
-        public float maxTurnSpeed;
-        public float fireDelay;
 
         public Team team
         {
@@ -41,11 +34,6 @@ namespace LD32
         public override void Start()
         {
             input = GetComponent<IInput>();
-            body = GetComponent<Rigidbody2D>();
-            cannon = GetComponent<ICannon>();
-
-            firePeriodically = FirePeriodically();
-            StartCoroutine(firePeriodically);
         }
 
         // Update is called once per frame
@@ -57,20 +45,12 @@ namespace LD32
         void OnDestroy()
         {
             messageBus.global.convert.RemoveListener(GlobalConvert);
-            StopCoroutine(firePeriodically);
         }
 
         #endregion
 
         #region Internal API
-        IEnumerator FirePeriodically()
-        {
-            while (true)
-            {
-                cannon.FireBullet();
-                yield return new WaitForSeconds(fireDelay);
-            }
-        }
+       
         #endregion
 
         #region Event Handlers

@@ -8,7 +8,6 @@ namespace LD32
 
         Rigidbody2D body;
         IInput input;
-        ICannon cannon;
 
         public float acceleration;
         public float maxSpeed;
@@ -18,7 +17,6 @@ namespace LD32
         public override void Start()
         {
             input = GetComponent<PlayerInput>();
-            cannon = GetComponent<Cannon>();
             body = GetComponent<Rigidbody2D>();
         }
 
@@ -26,11 +24,6 @@ namespace LD32
         void Update()
         {
             LookAt2D(input.lookAt);
-
-            if (input.fire)
-            {
-                cannon.FireBullet();
-            }
         }
 
         void FixedUpdate()
