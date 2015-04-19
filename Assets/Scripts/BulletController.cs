@@ -14,6 +14,8 @@ namespace LD32
         }
 
         Rigidbody2D body;
+        int damage;
+
         // Use this for initialization
         void Awake()
         {
@@ -22,6 +24,13 @@ namespace LD32
 
         void OnCollisionEnter2D(Collision2D collision)
         {
+            var targets = collision.gameObject.GetComponents<IDamageListener>();
+
+            foreach (var target in targets)
+            {
+                target.Damage(damage);
+            }
+
             Destroy(this.gameObject);
         }
 
@@ -30,13 +39,15 @@ namespace LD32
             body.AddRelativeForce(new Vector2(force, 0));
         }
 
-        public static void Instantiate(Vector2 location, Quaternion orientation, float force)
+        public static void Instantiate(Vector2 location, Quaternion orientation, float force, int damage)
         {
             var bullet = Instantiate<GameObject>(prefab).GetComponent<BulletController>();
             bullet.transform.position = location;
             bullet.transform.rotation = orientation;
+            bullet.damage = damage;
             bullet.Push(force);
         }
+
     }
 
 }

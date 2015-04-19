@@ -7,13 +7,15 @@ namespace LD32
     {
         public float distanceToSpawnBullet;
         public float bulletForce;
+        public int bulletDamage;
 
         public void FireBullet()
         {
             BulletController.Instantiate(
                 transform.TransformPoint(new Vector2(1, 0)),
                 transform.rotation,
-                bulletForce);
+                bulletForce,
+                bulletDamage);
         }
     }
 

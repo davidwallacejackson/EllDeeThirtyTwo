@@ -13,6 +13,7 @@ namespace LD32
         public float acceleration;
         public float maxSpeed;
 
+
         // Use this for initialization
         void Start()
         {
@@ -46,6 +47,7 @@ namespace LD32
                 body.velocity = body.velocity.normalized * maxSpeed;
             }
         }
+
     }
 
 }
