@@ -10,6 +10,9 @@ namespace LD32
         Text healthDisplay;
         int healthAlertThreshold;
 
+        int totalEnemies = 0;
+        Text enemiesDisplay;
+
         public float percentHealthAlertThreshold;
         public Color normalColor;
         public Color alertColor;
@@ -18,16 +21,21 @@ namespace LD32
         public override void Awake()
         {
             base.Awake();
+            messageBus.global.enemyDestroyed.AddListener(EnemyDestroyed);
         }
 
         public override void Start()
         {
             base.Start();
             playerHealth = FindObjectOfType<PlayerController>().GetComponent<Health>();
-            healthDisplay = transform.FindChild("Health Display").GetComponent<Text>();
+            healthDisplay = transform.Find("Health Row/Health Display").GetComponent<Text>();
 
             healthAlertThreshold = (int)(
                 percentHealthAlertThreshold * playerHealth.maxHealth);
+
+            totalEnemies = FindObjectsOfType<EnemyController>().Length;
+            enemiesDisplay = transform.Find("Enemies Row/Enemies Display").GetComponent<Text>();
+            enemiesDisplay.text = totalEnemies.ToString("D2");
         }
 
         void Update()
@@ -50,6 +58,11 @@ namespace LD32
         #endregion
 
         #region Internal Methods
+        void EnemyDestroyed()
+        {
+            totalEnemies -= 1;
+            enemiesDisplay.text = totalEnemies.ToString("D2");
+        }
         #endregion
 
         #region Event Callbacks

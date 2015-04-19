@@ -44,6 +44,7 @@ namespace LD32
 
         void OnDestroy()
         {
+            messageBus.global.enemyDestroyed.Invoke();
             messageBus.global.convert.RemoveListener(GlobalConvert);
         }
 

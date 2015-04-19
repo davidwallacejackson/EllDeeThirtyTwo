@@ -23,6 +23,8 @@ namespace LD32
         GameObjectEvent _convert = new GameObjectEvent();
         public GameObjectEvent convert { get { return _convert; } }
 
+        NoArgEvent _enemyDestroyed = new NoArgEvent();
+        public NoArgEvent enemyDestroyed { get { return _enemyDestroyed; } }
     }
 
 }
