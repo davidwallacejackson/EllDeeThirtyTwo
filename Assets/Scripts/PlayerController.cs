@@ -8,7 +8,7 @@ namespace LD32
 
         Rigidbody2D body;
         IInput input;
-        Cannon cannon;
+        ICannon cannon;
 
         public float acceleration;
         public float maxSpeed;
