@@ -8,6 +8,7 @@ namespace LD32
 
         Rigidbody2D body;
         IInput input;
+        Cannon cannon;
 
         public float acceleration;
         public float maxSpeed;
@@ -16,24 +17,34 @@ namespace LD32
         void Start()
         {
             input = GetComponent<PlayerInput>();
+            cannon = GetComponent<Cannon>();
             body = GetComponent<Rigidbody2D>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            Vector2 impulse = input.GetMoveVector();
-
-            if (body.velocity.magnitude < maxSpeed)
-            {
-                impulse = impulse.normalized * acceleration * Time.deltaTime;
-                body.AddForce(impulse);
-            }
-
-            var lookDirection = (Vector2)transform.position - input.lookAt;
+            var lookDirection = input.lookAt - (Vector2)transform.position;
 
             float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            if (input.fire)
+            {
+                cannon.FireBullet();
+            }
+        }
+
+        void FixedUpdate()
+        {
+            Vector2 impulse = input.GetMoveVector();
+            impulse = impulse.normalized * acceleration * Time.fixedDeltaTime;
+            body.AddForce(impulse);
+
+            if (body.velocity.magnitude > maxSpeed)
+            {
+                body.velocity = body.velocity.normalized * maxSpeed;
+            }
         }
     }
 

@@ -5,16 +5,37 @@ namespace LD32
 {
     public class BulletController : BaseBehaviour
     {
-        Rigidbody2D body;
-        // Use this for initialization
-        void Start()
+        static GameObject prefab
         {
-            body = GetComponent<Rigidbody2D>();
-            body.AddForce(new Vector2(10, 10));
+            get
+            {
+                return Resources.Load<GameObject>("Bullet");
+            }
         }
 
-        void OnCollisionEnter2D(Collision2D collision) {
+        Rigidbody2D body;
+        // Use this for initialization
+        void Awake()
+        {
+            body = GetComponent<Rigidbody2D>();
+        }
+
+        void OnCollisionEnter2D(Collision2D collision)
+        {
             Destroy(this.gameObject);
+        }
+
+        public void Push(float force)
+        {
+            body.AddRelativeForce(new Vector2(force, 0));
+        }
+
+        public static void Instantiate(Vector2 location, Quaternion orientation, float force)
+        {
+            var bullet = Instantiate<GameObject>(prefab).GetComponent<BulletController>();
+            bullet.transform.position = location;
+            bullet.transform.rotation = orientation;
+            bullet.Push(force);
         }
     }
 
