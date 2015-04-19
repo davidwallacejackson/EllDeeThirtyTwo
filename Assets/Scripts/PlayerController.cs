@@ -25,10 +25,7 @@ namespace LD32
         // Update is called once per frame
         void Update()
         {
-            var lookDirection = input.lookAt - (Vector2)transform.position;
-
-            float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            LookAt2D(input.lookAt);
 
             if (input.fire)
             {

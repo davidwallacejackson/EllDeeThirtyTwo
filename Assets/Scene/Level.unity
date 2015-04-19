@@ -1804,6 +1804,18 @@ PolygonCollider2D:
       - {x: .504019737, y: -.0422263145}
       - {x: -.415928125, y: -.506966352}
       - {x: -.489183426, y: -.475662947}
+--- !u!114 &979990164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 979990156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb7a3f3c3a53394da4fbef3d0a4579c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
 --- !u!1 &989768063
 GameObject:
   m_ObjectHideFlags: 0
