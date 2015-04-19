@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace LD32
 {
-    public class Health : MonoBehaviour, IDamageListener
+    public class Health : BaseBehaviour, IDamageListener
     {
         int _health;
 
@@ -27,7 +27,7 @@ namespace LD32
 
             if (_health <= 0)
             {
-                Destroy(this.gameObject);
+                this.Destroy();
             }
         }
     }

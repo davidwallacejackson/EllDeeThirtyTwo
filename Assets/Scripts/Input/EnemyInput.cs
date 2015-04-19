@@ -8,11 +8,16 @@ namespace LD32
         /// <summary>
         /// Set this to the player.
         /// </summary>
-        Transform target;
+        PlayerController target;
+        Vector2 lastTargetPosition;
+
+        bool targetIsAlive = false;
 
         void Start()
         {
-            target = FindObjectOfType<PlayerController>().transform;
+            target = FindObjectOfType<PlayerController>();
+            targetIsAlive = true;
+            target.destroyed.AddListener(TargetDestroyed);
         }
 
         public Vector2 GetMoveVector()
@@ -24,7 +29,12 @@ namespace LD32
         {
             get
             {
-                return target.position;
+                if (targetIsAlive)
+                {
+                    lastTargetPosition = target.transform.position;
+                }
+
+                return lastTargetPosition;
             }
         }
 
@@ -34,6 +44,11 @@ namespace LD32
             {
                 return false;
             }
+        }
+
+        public void TargetDestroyed(BaseBehaviour destroyed)
+        {
+            targetIsAlive = false;
         }
     }
 

@@ -31,7 +31,7 @@ namespace LD32
                 target.Damage(damage);
             }
 
-            Destroy(this.gameObject);
+            this.Destroy();
         }
 
         public void Push(float force)
