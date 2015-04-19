@@ -25,13 +25,12 @@ namespace LD32
             set
             {
                 _team = value;
-                teamChanged.Invoke(_team);
+                messageBus.teamChanged.Invoke(_team);
             }
         }
-        public TeamEvent teamChanged = new TeamEvent();
 
         // Use this for initialization
-        void Start()
+        public override void Start()
         {
             input = GetComponent<IInput>();
             body = GetComponent<Rigidbody2D>();

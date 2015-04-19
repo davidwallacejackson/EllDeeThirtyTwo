@@ -17,8 +17,9 @@ namespace LD32
         int damage;
 
         // Use this for initialization
-        void Awake()
+        public override void Awake()
         {
+            base.Awake();
             body = GetComponent<Rigidbody2D>();
         }
 

@@ -5,21 +5,52 @@ namespace LD32
 {
     public class EnemyInput : BaseBehaviour, IInput
     {
-        /// <summary>
-        /// Set this to the player.
-        /// </summary>
-        PlayerController target;
+        BaseBehaviour _target;
+        BaseBehaviour target
+        {
+            get
+            {
+                return _target;
+            }
+            set
+            {
+                if (_target == value || value == null)
+                    return;
+
+                if (_target != null)
+                {
+                    //if the old target's still around, stop listening for
+                    //events on it...
+                }
+
+                _target = value;
+
+                //WARNING: this might not be true, especially if we
+                //implement pooling later on
+                targetIsAlive = true;
+                target.messageBus.destroyed.AddListener(TargetDestroyed);
+            }
+        }
         Vector2 lastTargetPosition;
+        Team team = Team.EVIL;
 
         bool targetIsAlive = false;
 
-        void Start()
+        #region Unity Hooks
+        public override void Awake()
         {
-            target = FindObjectOfType<PlayerController>();
-            targetIsAlive = true;
-            target.destroyed.AddListener(TargetDestroyed);
+            base.Awake();
+
+            messageBus.teamChanged.AddListener(TeamChanged);
         }
 
+        public override void Start()
+        {
+            target = GetTarget();
+        }
+        #endregion
+
+        #region Public API
         public Vector2 GetMoveVector()
         {
             return Vector2.zero;
@@ -45,11 +76,36 @@ namespace LD32
                 return false;
             }
         }
+        #endregion
 
-        public void TargetDestroyed(BaseBehaviour destroyed)
+        #region Internal Methods
+        BaseBehaviour GetTarget()
+        {
+            if (team == Team.EVIL)
+            {
+                return FindObjectOfType<PlayerController>();
+            }
+            else
+            {
+                return FindObjectOfType<EnemyController>();
+            }
+        }
+        #endregion
+
+        #region Event Callbacks
+        void TargetDestroyed(BaseBehaviour destroyed)
         {
             targetIsAlive = false;
         }
+
+        void TeamChanged(Team newTeam)
+        {
+            team = newTeam;
+
+            //we should re-find our target:
+            target = GetTarget();
+        }
+        #endregion
     }
 
 }

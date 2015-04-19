@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace LD32
 {
@@ -16,6 +15,7 @@ namespace LD32
                 transform.rotation,
                 bulletForce,
                 bulletDamage);
+            
         }
     }
 

@@ -10,12 +10,18 @@ namespace LD32
         Dictionary<Team, Sprite> teamSprites;
 
         EnemyController controller;
-        SpriteRenderer renderer;
+        SpriteRenderer spriteRenderer;
 
         // Use this for initialization
-        void Start()
+        public override void Awake()
         {
-            renderer = GetComponent<SpriteRenderer>();
+            base.Awake();
+            messageBus.teamChanged.AddListener(ChangeSprite);
+        }
+
+        public override void Start()
+        {
+            spriteRenderer = transform.FindChild("Sprite").GetComponent<SpriteRenderer>();
             controller = GetComponent<EnemyController>();
 
             teamSprites = new Dictionary<Team, Sprite>()
@@ -23,20 +29,16 @@ namespace LD32
                 {Team.GOOD, Resources.Load<Sprite>("Sprites/Friendly")},
                 {Team.EVIL, Resources.Load<Sprite>("Sprites/Enemy")}
             };
-
-            controller.teamChanged.AddListener(ChangeSprite);
-
-            controller.team = Team.GOOD;
         }
 
         void OnDestroy()
         {
-            controller.teamChanged.RemoveListener(ChangeSprite);
+            messageBus.teamChanged.RemoveListener(ChangeSprite);
         }
 
         void ChangeSprite(Team team)
         {
-            renderer.sprite = teamSprites[team];
+            spriteRenderer.sprite = teamSprites[team];
         }
     }
 

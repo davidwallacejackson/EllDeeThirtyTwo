@@ -15,7 +15,7 @@ namespace LD32
 
 
         // Use this for initialization
-        void Start()
+        public override void Start()
         {
             input = GetComponent<PlayerInput>();
             cannon = GetComponent<Cannon>();

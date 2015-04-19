@@ -16,7 +16,7 @@ namespace LD32
             }
         }
 
-        void Start()
+        public override void Start()
         {
             _health = maxHealth;
         }
