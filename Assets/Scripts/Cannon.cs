@@ -14,6 +14,7 @@ namespace LD32
                 transform.TransformPoint(new Vector2(1, 0)),
                 transform.rotation,
                 bulletForce,
+                BulletMode.Damage,
                 bulletDamage);
             
         }

@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace LD32
 {
-    public class Health : BaseBehaviour, IDamageListener
+    public class Health : BaseBehaviour
     {
         int _health;
 
@@ -14,6 +14,12 @@ namespace LD32
             {
                 return _health;
             }
+        }
+
+        public override void Awake()
+        {
+            base.Awake();
+            messageBus.damage.AddListener(Damage);
         }
 
         public override void Start()

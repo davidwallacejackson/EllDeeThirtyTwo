@@ -11,6 +11,10 @@ namespace LD32
     /// </summary>
     public class BehaviourMessageBus : MonoBehaviour
     {
+        /// <summary>
+        /// Trigger or respond to damage;
+        /// </summary>
+        public IntEvent damage = new IntEvent();
         public BehaviourEvent destroyed = new BehaviourEvent();
         public TeamEvent teamChanged = new TeamEvent();
     }

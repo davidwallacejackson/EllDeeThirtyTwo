@@ -15,8 +15,9 @@ namespace LD32
 
         Rigidbody2D body;
         int damage;
+        BulletMode mode;
 
-        // Use this for initialization
+        #region Unity Hooks
         public override void Awake()
         {
             base.Awake();
@@ -25,30 +26,55 @@ namespace LD32
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            var targets = collision.gameObject.GetComponents<IDamageListener>();
-
-            foreach (var target in targets)
+            var target = collision.gameObject.GetComponent<BaseBehaviour>();
+            
+            if (target != null)
             {
-                target.Damage(damage);
+                MessageToTarget(target);
             }
 
             this.Destroy();
         }
+        #endregion
 
+        #region Public API
         public void Push(float force)
         {
             body.AddRelativeForce(new Vector2(force, 0));
         }
 
-        public static void Instantiate(Vector2 location, Quaternion orientation, float force, int damage)
+        public static void Instantiate(Vector2 location, Quaternion orientation,
+            float force, BulletMode mode, int damage = 0)
         {
             var bullet = Instantiate<GameObject>(prefab).GetComponent<BulletController>();
             bullet.transform.position = location;
             bullet.transform.rotation = orientation;
+            bullet.mode = mode;
             bullet.damage = damage;
             bullet.Push(force);
         }
+        #endregion
 
+        #region Internal Methods
+        /// <summary>
+        /// Depending on the bullet's mode, either deals damage or sends
+        /// a team change signal.
+        /// </summary>
+        /// <param name="target">a target we just hit</param>
+        void MessageToTarget(BaseBehaviour target)
+        {
+            if (mode == BulletMode.Damage)
+            {
+                target.messageBus.damage.Invoke(damage);
+            }
+            else if (mode == BulletMode.Convert)
+            {
+                //TODO: send this through a global bus so that we
+                //can notify other enemies
+                target.messageBus.teamChanged.Invoke(Team.GOOD);
+            }
+        }
+        #endregion
     }
 
 }

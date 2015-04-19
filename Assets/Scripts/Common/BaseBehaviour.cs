@@ -37,8 +37,6 @@ namespace LD32
             messageBus.destroyed.Invoke(this);
         }
 
-
-
         protected void LookAt2D(Vector2 lookAt)
         {
             var lookDirection = lookAt - (Vector2)transform.position;

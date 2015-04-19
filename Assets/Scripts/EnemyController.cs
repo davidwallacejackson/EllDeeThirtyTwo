@@ -29,6 +29,7 @@ namespace LD32
             }
         }
 
+        #region Unity Hooks
         // Use this for initialization
         public override void Start()
         {
@@ -40,17 +41,20 @@ namespace LD32
             StartCoroutine(firePeriodically);
         }
 
-        void OnDestroy()
-        {
-            StopCoroutine(firePeriodically);
-        }
-
         // Update is called once per frame
         void Update()
         {
             LookAt2D(input.lookAt);
         }
 
+        void OnDestroy()
+        {
+            StopCoroutine(firePeriodically);
+        }
+
+        #endregion
+
+        #region Internal API
         IEnumerator FirePeriodically()
         {
             while (true)
@@ -59,6 +63,7 @@ namespace LD32
                 yield return new WaitForSeconds(fireDelay);
             }
         }
+        #endregion
     }
 
 }
