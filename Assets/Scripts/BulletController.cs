@@ -69,9 +69,7 @@ namespace LD32
             }
             else if (mode == BulletMode.Convert)
             {
-                //TODO: send this through a global bus so that we
-                //can notify other enemies
-                target.messageBus.teamChanged.Invoke(Team.GOOD);
+                messageBus.global.convert.Invoke(target.gameObject);
             }
         }
         #endregion

@@ -30,6 +30,13 @@ namespace LD32
         }
 
         #region Unity Hooks
+
+        public override void Awake()
+        {
+            base.Awake();
+            messageBus.global.convert.AddListener(GlobalConvert);
+        }
+
         // Use this for initialization
         public override void Start()
         {
@@ -49,6 +56,7 @@ namespace LD32
 
         void OnDestroy()
         {
+            messageBus.global.convert.RemoveListener(GlobalConvert);
             StopCoroutine(firePeriodically);
         }
 
@@ -61,6 +69,24 @@ namespace LD32
             {
                 cannon.FireBullet();
                 yield return new WaitForSeconds(fireDelay);
+            }
+        }
+        #endregion
+
+        #region Event Handlers
+        /// <summary>
+        /// Something needs to switch sides. May or may not be us.
+        /// </summary>
+        void GlobalConvert(GameObject target)
+        {
+            if (target == this.gameObject)
+            {
+                team = Team.GOOD;
+            }
+            else if (this.team == Team.GOOD)
+            {
+                //there can only be one ally at a time:
+                team = Team.EVIL;
             }
         }
         #endregion

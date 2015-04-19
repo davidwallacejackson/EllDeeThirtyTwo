@@ -11,6 +11,8 @@ namespace LD32
     /// </summary>
     public class BehaviourMessageBus : MonoBehaviour
     {
+        public GlobalMessageBus global = GlobalMessageBus.Instance;
+
         /// <summary>
         /// Trigger or respond to damage;
         /// </summary>
