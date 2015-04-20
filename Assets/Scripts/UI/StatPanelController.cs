@@ -66,8 +66,11 @@ namespace LD32
         #region Internal Methods
         void EnemyDestroyed()
         {
-            totalEnemies -= 1;
-            enemiesDisplay.text = totalEnemies.ToString("D2");
+            if (isAlive)
+            {
+                totalEnemies -= 1;
+                enemiesDisplay.text = totalEnemies.ToString("D2");
+            }
         }
 
         void LevelReloading()

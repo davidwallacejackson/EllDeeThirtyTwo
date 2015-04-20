@@ -52,6 +52,15 @@ namespace LD32
                 messageBus.global.levelComplete.Invoke();
             }
         }
+
+        //TODO: as with DeadPanelController, this is assigned from
+        //the editor and we should switch it to code.
+        public void Click()
+        {
+            //TODO: come up with a more appropriate event for this:
+            messageBus.global.levelReloading.Invoke();
+            Application.LoadLevel("Main Menu");
+        }
         #endregion
     }
 

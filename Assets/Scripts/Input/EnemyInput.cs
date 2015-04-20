@@ -118,7 +118,16 @@ namespace LD32
         {
             while (true)
             {
+                if (!targetIsAlive)
+                {
+                    _target = GetTarget();
+                    if (_target != null)
+                    {
+                        targetIsAlive = true;
+                    }
+                }
                 messageBus.fireBullet.Invoke();
+
                 yield return new WaitForSeconds(fireDelay);
             }
         }
