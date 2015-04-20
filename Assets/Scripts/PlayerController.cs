@@ -38,6 +38,11 @@ namespace LD32
             }
         }
 
+        void OnDestroy()
+        {
+            messageBus.global.playerDestroyed.Invoke();
+        }
+
     }
 
 }

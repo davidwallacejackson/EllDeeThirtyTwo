@@ -10,6 +10,7 @@ namespace LD32
         Text healthDisplay;
         int healthAlertThreshold;
 
+        bool isAlive;
         int totalEnemies = 0;
         Text enemiesDisplay;
 
@@ -22,11 +23,13 @@ namespace LD32
         {
             base.Awake();
             messageBus.global.enemyDestroyed.AddListener(EnemyDestroyed);
+            messageBus.global.levelReloading.AddListener(LevelReloading);
         }
 
         public override void Start()
         {
             base.Start();
+            isAlive = true;
             playerHealth = FindObjectOfType<PlayerController>().GetComponent<Health>();
             healthDisplay = transform.Find("Health Row/Health Display").GetComponent<Text>();
 
@@ -40,16 +43,19 @@ namespace LD32
 
         void Update()
         {
-            healthDisplay.text = playerHealth.health.ToString("D3");
+            if (isAlive)
+            {
+                healthDisplay.text = playerHealth.health.ToString("D3");
 
 
-            if (playerHealth.health < healthAlertThreshold)
-            {
-                healthDisplay.color = alertColor;
-            }
-            else
-            {
-                healthDisplay.color = normalColor;
+                if (playerHealth.health < healthAlertThreshold)
+                {
+                    healthDisplay.color = alertColor;
+                }
+                else
+                {
+                    healthDisplay.color = normalColor;
+                }
             }
         }
         #endregion
@@ -62,6 +68,11 @@ namespace LD32
         {
             totalEnemies -= 1;
             enemiesDisplay.text = totalEnemies.ToString("D2");
+        }
+
+        void LevelReloading()
+        {
+            isAlive = false;
         }
         #endregion
 

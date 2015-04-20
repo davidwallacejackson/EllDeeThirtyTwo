@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 namespace LD32
 {
-    public class CamerController : BaseBehaviour
+    public class DeadPanelController : BaseBehaviour
     {
-        PlayerController player;
-        bool isAlive;
+        GameObject panel;
 
         #region Unity Hooks
         public override void Awake()
@@ -17,21 +17,9 @@ namespace LD32
         public override void Start()
         {
             base.Start();
-            player = FindObjectOfType<PlayerController>();
-            isAlive = true;
 
+            panel = transform.Find("Dead Panel").gameObject;
             messageBus.global.playerDestroyed.AddListener(PlayerDestroyed);
-        }
-
-        public void Update()
-        {
-            if (isAlive)
-            {
-                transform.position = new Vector3(
-                    player.transform.position.x,
-                    player.transform.position.y,
-                    this.transform.position.z);
-            }
         }
         #endregion
 
@@ -44,7 +32,15 @@ namespace LD32
         #region Event Callbacks
         void PlayerDestroyed()
         {
-            isAlive = false;
+            panel.SetActive(true);
+        }
+
+        //TODO: we're binding this from the UI. would prefer to do
+        //it in PlayerDestroyed() when we enable the panel.
+        public void Click()
+        {
+            messageBus.global.levelReloading.Invoke();
+            Application.LoadLevel(Application.loadedLevel);
         }
         #endregion
     }
