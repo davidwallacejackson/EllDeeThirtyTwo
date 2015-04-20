@@ -26,6 +26,11 @@ namespace LD32
             {
                 messageBus.fireBullet.Invoke();
             }
+
+            if (Input.GetButtonDown("Reload Level"))
+            {
+                messageBus.global.manualReloadLevel.Invoke();
+            }
         }
 
         public Vector2 GetMoveVector()

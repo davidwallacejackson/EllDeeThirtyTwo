@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Resources/Scene/Main Menu.unity
   - enabled: 1
     path: Assets/Resources/Scene/Simple.unity
+  - enabled: 1
+    path: Assets/Resources/Scene/Hard.unity

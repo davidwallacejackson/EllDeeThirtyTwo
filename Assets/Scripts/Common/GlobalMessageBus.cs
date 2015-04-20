@@ -24,11 +24,18 @@ namespace LD32
         {
             //tear down the global bus if the level reloads:
             this.levelReloading.AddListener(Teardown);
+            this.manualReloadLevel.AddListener(Reload);
         }
 
         void Teardown()
         {
             _instance = null;
+        }
+
+        void Reload()
+        {
+            this.levelReloading.Invoke();
+            Application.LoadLevel(Application.loadedLevel);
         }
 
         GameObjectEvent _convert = new GameObjectEvent();
@@ -45,6 +52,9 @@ namespace LD32
 
         NoArgEvent _levelReloading = new NoArgEvent();
         public NoArgEvent levelReloading { get { return _levelReloading; } }
+
+        NoArgEvent _manualReloadLevel = new NoArgEvent();
+        public NoArgEvent manualReloadLevel { get { return _manualReloadLevel; } }
     }
 
 }
