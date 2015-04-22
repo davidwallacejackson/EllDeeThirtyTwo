@@ -20,7 +20,7 @@ namespace LD32
             player = FindObjectOfType<PlayerController>();
             isAlive = true;
 
-            messageBus.global.playerDestroyed.AddListener(PlayerDestroyed);
+            MessageBus.Global.OnPlayerDestroyed.AddListener(PlayerDestroyed);
         }
 
         public void Update()

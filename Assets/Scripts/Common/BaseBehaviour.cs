@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 namespace LD32
 {
     public class BaseBehaviour : MonoBehaviour
     {
         BehaviourMessageBus _messageBus;
-        public BehaviourMessageBus messageBus
+        public BehaviourMessageBus MessageBus
         {
             get
             {
@@ -16,7 +15,7 @@ namespace LD32
 
         public virtual void Awake()
         {
-            //resolve messageBus before we do anything else:
+            //resolve MessageBus before we do anything else:
             _messageBus = GetComponent<BehaviourMessageBus>();
 
             if (_messageBus == null)
@@ -34,7 +33,7 @@ namespace LD32
 
         void OnDestroy()
         {
-            messageBus.destroyed.Invoke(this);
+            MessageBus.OnDestroy.Invoke(this);
         }
 
         protected void LookAt2D(Vector2 lookAt)
@@ -43,11 +42,6 @@ namespace LD32
 
             float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
-
-        protected virtual void Destroy()
-        {
-            Destroy(gameObject);
         }
     }
 

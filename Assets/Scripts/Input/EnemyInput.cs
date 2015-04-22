@@ -28,7 +28,7 @@ namespace LD32
                 //WARNING: this might not be true, especially if we
                 //implement pooling later on
                 targetIsAlive = true;
-                target.messageBus.destroyed.AddListener(TargetDestroyed);
+                target.MessageBus.OnDestroy.AddListener(TargetDestroyed);
             }
         }
         Vector2 lastTargetPosition;
@@ -43,7 +43,7 @@ namespace LD32
         {
             base.Awake();
 
-            messageBus.teamChanged.AddListener(TeamChanged);
+            MessageBus.ChangeTeam.AddListener(TeamChanged);
         }
 
         public override void Start()
@@ -61,9 +61,12 @@ namespace LD32
         #endregion
 
         #region Public API
-        public Vector2 GetMoveVector()
+        public Vector2 MoveVector
         {
-            return Vector2.zero;
+            get
+            {
+                return Vector2.zero;
+            }
         }
 
         public Vector2 lookAt
@@ -126,7 +129,7 @@ namespace LD32
                         targetIsAlive = true;
                     }
                 }
-                messageBus.fireBullet.Invoke();
+                MessageBus.FireBullet.Invoke();
 
                 yield return new WaitForSeconds(fireDelay);
             }

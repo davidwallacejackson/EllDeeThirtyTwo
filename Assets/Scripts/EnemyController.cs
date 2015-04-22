@@ -18,7 +18,7 @@ namespace LD32
             set
             {
                 _team = value;
-                messageBus.teamChanged.Invoke(_team);
+                MessageBus.ChangeTeam.Invoke(_team);
             }
         }
 
@@ -27,7 +27,7 @@ namespace LD32
         public override void Awake()
         {
             base.Awake();
-            messageBus.global.convert.AddListener(GlobalConvert);
+            MessageBus.Global.Convert.AddListener(GlobalConvert);
         }
 
         // Use this for initialization
@@ -44,8 +44,8 @@ namespace LD32
 
         void OnDestroy()
         {
-            messageBus.global.enemyDestroyed.Invoke();
-            messageBus.global.convert.RemoveListener(GlobalConvert);
+            MessageBus.Global.OnEnemyDestroyed.Invoke();
+            MessageBus.Global.Convert.RemoveListener(GlobalConvert);
         }
 
         #endregion

@@ -15,7 +15,7 @@ namespace LD32
         public override void Awake()
         {
             base.Awake();
-            messageBus.teamChanged.AddListener(ChangeSprite);
+            MessageBus.ChangeTeam.AddListener(ChangeSprite);
         }
 
         public override void Start()
@@ -31,7 +31,7 @@ namespace LD32
 
         void OnDestroy()
         {
-            messageBus.teamChanged.RemoveListener(ChangeSprite);
+            MessageBus.ChangeTeam.RemoveListener(ChangeSprite);
         }
 
         void ChangeSprite(Team team)

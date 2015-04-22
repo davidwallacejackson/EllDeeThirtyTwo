@@ -16,7 +16,7 @@ namespace LD32
         // Use this for initialization
         public override void Start()
         {
-            input = GetComponent<PlayerInput>();
+            input = GetComponent<IInput>();
             body = GetComponent<Rigidbody2D>();
         }
 
@@ -28,7 +28,7 @@ namespace LD32
 
         void FixedUpdate()
         {
-            Vector2 impulse = input.GetMoveVector();
+            Vector2 impulse = input.MoveVector;
             impulse = impulse.normalized * acceleration * Time.fixedDeltaTime;
             body.AddForce(impulse);
 
@@ -40,7 +40,7 @@ namespace LD32
 
         void OnDestroy()
         {
-            messageBus.global.playerDestroyed.Invoke();
+            MessageBus.Global.OnPlayerDestroyed.Invoke();
         }
 
     }

@@ -11,20 +11,19 @@ namespace LD32
     /// </summary>
     public class BehaviourMessageBus : MonoBehaviour
     {
-        public GlobalMessageBus global = GlobalMessageBus.Instance;
+        public GlobalMessageBus Global = GlobalMessageBus.Instance;
 
+        TeamEvent changeTeam = new TeamEvent();
+        public TeamEvent ChangeTeam { get { return changeTeam; } }
 
         IntEvent _damage = new IntEvent();
-        public IntEvent damage { get { return _damage; } }
-
-        BehaviourEvent _destroyed = new BehaviourEvent();
-        public BehaviourEvent destroyed { get { return _destroyed; } }
+        public IntEvent Damage { get { return _damage; } }
 
         NoArgEvent _fireBullet = new NoArgEvent();
-        public NoArgEvent fireBullet { get { return _fireBullet; } }
+        public NoArgEvent FireBullet { get { return _fireBullet; } }
 
-        TeamEvent _teamChanged = new TeamEvent();
-        public TeamEvent teamChanged { get { return _teamChanged; } }
+        BehaviourEvent _destroyed = new BehaviourEvent();
+        public BehaviourEvent OnDestroy { get { return _destroyed; } }
 
     }
 

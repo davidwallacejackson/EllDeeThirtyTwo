@@ -19,7 +19,7 @@ namespace LD32
         public override void Awake()
         {
             base.Awake();
-            messageBus.damage.AddListener(Damage);
+            MessageBus.Damage.AddListener(Damage);
         }
 
         public override void Start()
@@ -33,7 +33,7 @@ namespace LD32
 
             if (_health <= 0)
             {
-                this.Destroy();
+                Destroy(this.gameObject);
             }
         }
     }

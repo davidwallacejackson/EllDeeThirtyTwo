@@ -22,8 +22,8 @@ namespace LD32
         public override void Awake()
         {
             base.Awake();
-            messageBus.global.enemyDestroyed.AddListener(EnemyDestroyed);
-            messageBus.global.levelReloading.AddListener(LevelReloading);
+            MessageBus.Global.OnEnemyDestroyed.AddListener(EnemyDestroyed);
+            MessageBus.Global.OnLevelWillReload.AddListener(LevelReloading);
         }
 
         public override void Start()

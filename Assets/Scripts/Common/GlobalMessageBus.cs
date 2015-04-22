@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
-using System.Collections;
 
 namespace LD32
 {
@@ -23,8 +21,8 @@ namespace LD32
         public GlobalMessageBus()
         {
             //tear down the global bus if the level reloads:
-            this.levelReloading.AddListener(Teardown);
-            this.manualReloadLevel.AddListener(Reload);
+            this.OnLevelWillReload.AddListener(Teardown);
+            this.ManualReloadLevel.AddListener(Reload);
         }
 
         void Teardown()
@@ -34,27 +32,27 @@ namespace LD32
 
         void Reload()
         {
-            this.levelReloading.Invoke();
+            this.OnLevelWillReload.Invoke();
             Application.LoadLevel(Application.loadedLevel);
         }
 
         GameObjectEvent _convert = new GameObjectEvent();
-        public GameObjectEvent convert { get { return _convert; } }
+        public GameObjectEvent Convert { get { return _convert; } }
 
-        NoArgEvent _enemyDestroyed = new NoArgEvent();
-        public NoArgEvent enemyDestroyed { get { return _enemyDestroyed; } }
+        NoArgEvent _onEnemyDestroyed = new NoArgEvent();
+        public NoArgEvent OnEnemyDestroyed { get { return _onEnemyDestroyed; } }
 
-        NoArgEvent _playerDestroyed = new NoArgEvent();
-        public NoArgEvent playerDestroyed { get { return _playerDestroyed; } }
+        NoArgEvent _onPlayerDestroyed = new NoArgEvent();
+        public NoArgEvent OnPlayerDestroyed { get { return _onPlayerDestroyed; } }
 
         NoArgEvent _levelComplete = new NoArgEvent();
-        public NoArgEvent levelComplete { get { return _levelComplete; } }
+        public NoArgEvent LevelComplete { get { return _levelComplete; } }
 
-        NoArgEvent _levelReloading = new NoArgEvent();
-        public NoArgEvent levelReloading { get { return _levelReloading; } }
+        NoArgEvent _onLevelWillReload = new NoArgEvent();
+        public NoArgEvent OnLevelWillReload { get { return _onLevelWillReload; } }
 
         NoArgEvent _manualReloadLevel = new NoArgEvent();
-        public NoArgEvent manualReloadLevel { get { return _manualReloadLevel; } }
+        public NoArgEvent ManualReloadLevel { get { return _manualReloadLevel; } }
     }
 
 }

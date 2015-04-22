@@ -19,7 +19,7 @@ namespace LD32
             base.Start();
 
             panel = transform.Find("Dead Panel").gameObject;
-            messageBus.global.playerDestroyed.AddListener(PlayerDestroyed);
+            MessageBus.Global.OnPlayerDestroyed.AddListener(PlayerDestroyed);
         }
         #endregion
 
@@ -39,7 +39,7 @@ namespace LD32
         //it in PlayerDestroyed() when we enable the panel.
         public void Click()
         {
-            messageBus.global.levelReloading.Invoke();
+            MessageBus.Global.OnLevelWillReload.Invoke();
             Application.LoadLevel(Application.loadedLevel);
         }
         #endregion

@@ -33,7 +33,7 @@ namespace LD32
                 MessageToTarget(target);
             }
 
-            this.Destroy();
+            Destroy(this.gameObject);
         }
         #endregion
 
@@ -65,11 +65,11 @@ namespace LD32
         {
             if (mode == BulletMode.Damage)
             {
-                target.messageBus.damage.Invoke(damage);
+                target.MessageBus.Damage.Invoke(damage);
             }
             else if (mode == BulletMode.Convert)
             {
-                messageBus.global.convert.Invoke(target.gameObject);
+                MessageBus.Global.Convert.Invoke(target.gameObject);
             }
         }
         #endregion

@@ -25,10 +25,10 @@ namespace LD32
             totalEnemies = FindObjectsOfType<EnemyController>().Length;
 
             //...and register with our own enemyDestroyed event
-            messageBus.global.enemyDestroyed.AddListener(EnemyDestroyed);
+            MessageBus.Global.OnEnemyDestroyed.AddListener(EnemyDestroyed);
 
             panel = transform.Find("Win Panel").gameObject;
-            messageBus.global.levelComplete.AddListener(LevelComplete);
+            MessageBus.Global.LevelComplete.AddListener(LevelComplete);
         }
         #endregion
 
@@ -49,7 +49,7 @@ namespace LD32
 
             if (totalEnemies <= 1)
             {
-                messageBus.global.levelComplete.Invoke();
+                MessageBus.Global.LevelComplete.Invoke();
             }
         }
 
@@ -58,7 +58,7 @@ namespace LD32
         public void Click()
         {
             //TODO: come up with a more appropriate event for this:
-            messageBus.global.levelReloading.Invoke();
+            MessageBus.Global.OnLevelWillReload.Invoke();
             Application.LoadLevel("Main Menu");
         }
         #endregion

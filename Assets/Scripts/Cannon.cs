@@ -2,7 +2,7 @@
 
 namespace LD32
 {
-    public class Cannon : BaseBehaviour, ICannon
+    public class Cannon : BaseBehaviour
     {
         public float distanceToSpawnBullet;
         public float bulletForce;
@@ -13,12 +13,12 @@ namespace LD32
         {
             base.Awake();
 
-            messageBus.fireBullet.AddListener(FireBullet);
+            MessageBus.FireBullet.AddListener(FireBullet);
         }
 
         public void OnDestroy()
         {
-            messageBus.fireBullet.RemoveListener(FireBullet);
+            MessageBus.FireBullet.RemoveListener(FireBullet);
         }
 
         public void FireBullet()

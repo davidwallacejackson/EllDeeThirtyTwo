@@ -24,18 +24,21 @@ namespace LD32
 
             if (Input.GetButtonDown("Fire"))
             {
-                messageBus.fireBullet.Invoke();
+                MessageBus.FireBullet.Invoke();
             }
 
             if (Input.GetButtonDown("Reload Level"))
             {
-                messageBus.global.manualReloadLevel.Invoke();
+                MessageBus.Global.ManualReloadLevel.Invoke();
             }
         }
 
-        public Vector2 GetMoveVector()
+        public Vector2 MoveVector
         {
-            return currentMove;
+            get
+            {
+                return currentMove;
+            }
         }
 
         public Vector2 lookAt
