@@ -39,6 +39,9 @@ namespace LD32
         GameObjectEvent _convert = new GameObjectEvent();
         public GameObjectEvent Convert { get { return _convert; } }
 
+        FloatEvent _screenShakeRequested = new FloatEvent();
+        public FloatEvent ScreenShakeRequested { get {return _screenShakeRequested; } }
+
         NoArgEvent _onEnemyDestroyed = new NoArgEvent();
         public NoArgEvent OnEnemyDestroyed { get { return _onEnemyDestroyed; } }
 

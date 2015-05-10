@@ -6,8 +6,11 @@ namespace LD32
     {
         public float distanceToSpawnBullet;
         public float bulletForce;
+        public float kickbackForce;
+        public float screenshakeAmount;
         public BulletMode mode = BulletMode.Damage;
         public int bulletDamage;
+        public AudioClip fireSound;
 
         public override void Awake()
         {
@@ -29,7 +32,16 @@ namespace LD32
                 bulletForce,
                 mode,
                 bulletDamage);
-            
+
+            if (fireSound != null)
+            {
+                AudioSource.PlayClipAtPoint(fireSound, transform.position);
+            }
+
+            var kickback = transform.right * -1 * kickbackForce;
+            MessageBus.ImpulseRequested.Invoke(kickback);
+
+            MessageBus.Global.ScreenShakeRequested.Invoke(screenshakeAmount);
         }
     }
 

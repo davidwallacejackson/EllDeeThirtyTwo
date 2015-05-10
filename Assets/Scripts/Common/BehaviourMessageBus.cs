@@ -25,6 +25,10 @@ namespace LD32
         BehaviourEvent _destroyed = new BehaviourEvent();
         public BehaviourEvent OnDestroy { get { return _destroyed; } }
 
+        VectorEvent _impulseRequested = new VectorEvent();
+        public VectorEvent ImpulseRequested { get {
+            return _impulseRequested; } }
+
     }
 
 }

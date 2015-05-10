@@ -21,6 +21,7 @@ namespace LD32
                 {
                     //if the old target's still around, stop listening for
                     //events on it...
+                    _target.MessageBus.OnDestroy.RemoveListener(TargetDestroyed);
                 }
 
                 _target = value;
@@ -37,6 +38,10 @@ namespace LD32
         bool targetIsAlive = false;
 
         public float fireDelay;
+
+        public float minFireDelayOffset;
+        public float maxFireDelayOffset;
+
 
         #region Unity Hooks
         public override void Awake()
@@ -57,6 +62,13 @@ namespace LD32
         void OnDestroy()
         {
             StopCoroutine(firePeriodically);
+        }
+
+        void OnValidate()
+        {
+            minFireDelayOffset = Mathf.Clamp(minFireDelayOffset, 0, fireDelay);
+            maxFireDelayOffset = Mathf.Clamp(maxFireDelayOffset,
+                minFireDelayOffset, fireDelay);
         }
         #endregion
 
@@ -129,9 +141,13 @@ namespace LD32
                         targetIsAlive = true;
                     }
                 }
+                var offset = Random.Range(minFireDelayOffset, 
+                    maxFireDelayOffset);
+
+                yield return new WaitForSeconds(offset);
                 MessageBus.FireBullet.Invoke();
 
-                yield return new WaitForSeconds(fireDelay);
+                yield return new WaitForSeconds(fireDelay - offset);
             }
         }
         #endregion

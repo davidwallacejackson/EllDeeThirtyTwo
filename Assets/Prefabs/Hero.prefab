@@ -30,6 +30,7 @@ GameObject:
   - 114: {fileID: 11422674}
   - 60: {fileID: 6089946}
   - 114: {fileID: 11492914}
+  - 114: {fileID: 11435660}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -106,8 +107,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToSpawnBullet: 1.5
   bulletForce: 75
+  kickbackForce: 500
+  screenshakeAmount: .100000001
   mode: 1
   bulletDamage: 20
+  fireSound: {fileID: 8300000, guid: 6acf2a32acb3745129a065b5f5dccc98, type: 3}
+--- !u!114 &11435660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66131736cafc4494691fdb30ba82a1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11471226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb7a3f3c3a53394da4fbef3d0a4579c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 60
 --- !u!212 &21294332
 SpriteRenderer:
   m_ObjectHideFlags: 1

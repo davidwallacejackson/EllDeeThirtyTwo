@@ -128,8 +128,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToSpawnBullet: 1.75
   bulletForce: 75
+  kickbackForce: 0
   mode: 0
   bulletDamage: 10
+  fireSound: {fileID: 8300000, guid: aa3bbb1eb32fc448d8e90fd02550779c, type: 3}
 --- !u!114 &11460852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,6 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireDelay: 1.5
+  minFireDelayOffset: 0
+  maxFireDelayOffset: .5
 --- !u!114 &11468264
 MonoBehaviour:
   m_ObjectHideFlags: 1
