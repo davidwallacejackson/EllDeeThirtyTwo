@@ -34,6 +34,10 @@ namespace LD32
             }
 
             Destroy(this.gameObject);
+
+            Sparks.Instantiate(
+                transform.position,
+                collision.contacts[0].normal);
         }
         #endregion
 
