@@ -26,12 +26,9 @@ namespace LD32
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            var target = collision.gameObject.GetComponent<BaseBehaviour>();
+            var target = collision.gameObject.GetMessageBus();
             
-            if (target != null)
-            {
-                MessageToTarget(target);
-            }
+            MessageToTarget(target);
 
             Destroy(this.gameObject);
 
@@ -65,11 +62,11 @@ namespace LD32
         /// a team change signal.
         /// </summary>
         /// <param name="target">a target we just hit</param>
-        void MessageToTarget(BaseBehaviour target)
+        void MessageToTarget(BehaviourMessageBus target)
         {
             if (mode == BulletMode.Damage)
             {
-                target.MessageBus.Damage.Invoke(damage);
+                target.Damage.Invoke(damage);
             }
             else if (mode == BulletMode.Convert)
             {

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace LD32
 {
@@ -11,7 +10,13 @@ namespace LD32
     /// </summary>
     public class BehaviourMessageBus : MonoBehaviour
     {
-        public GlobalMessageBus Global = GlobalMessageBus.Instance;
+        public GlobalMessageBus Global
+        {
+            get
+            {
+                return GlobalMessageBus.Instance;
+            }
+        }
 
         TeamEvent changeTeam = new TeamEvent();
         public TeamEvent ChangeTeam { get { return changeTeam; } }
