@@ -30,6 +30,11 @@ namespace LD32
             panel = transform.Find("Win Panel").gameObject;
             MessageBus.Global.LevelComplete.AddListener(LevelComplete);
         }
+
+        public void OnApplicationQuit()
+        {
+            MessageBus.Global.OnEnemyDestroyed.RemoveListener(EnemyDestroyed);
+        }
         #endregion
 
         #region Public API

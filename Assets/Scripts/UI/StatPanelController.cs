@@ -58,6 +58,11 @@ namespace LD32
                 }
             }
         }
+
+        void OnApplicationQuit()
+        {
+            MessageBus.Global.OnEnemyDestroyed.RemoveListener(EnemyDestroyed);
+        }
         #endregion
 
         #region Public API

@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 
 namespace LD32
 {
@@ -9,17 +7,18 @@ namespace LD32
         GameObject panel;
 
         #region Unity Hooks
-        public override void Awake()
-        {
-            base.Awake();
-        }
-
         public override void Start()
         {
             base.Start();
 
             panel = transform.Find("Dead Panel").gameObject;
             MessageBus.Global.OnPlayerDestroyed.AddListener(PlayerDestroyed);
+        }
+
+        public void OnApplicationQuit()
+        {
+            MessageBus.Global.OnPlayerDestroyed.RemoveListener(
+                PlayerDestroyed);
         }
         #endregion
 
